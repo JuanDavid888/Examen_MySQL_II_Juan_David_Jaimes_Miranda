@@ -1,4 +1,9 @@
 -- Active: 1751458388058@@127.0.0.1@3307@examen_mysql
+
+SHOW TABLES;
+
+-- Inserts
+
 INSERT INTO pais (nombre) VALUES
 ('Colombia'),
 ('México'),
