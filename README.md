@@ -765,3 +765,7 @@ En este Examen se te proporcionará el script SQL correspondiente a la estructur
 3. Define un evento llamado `ev_cierre_empleados_inactivos` que actualiza estado de empleados con salario 0 como inactivos, semanal.
 4. Define un evento llamado `ev_actualizar_fecha_contratacion_futura` que corrige empleados con `fecha_contratacion` mayor a `CURDATE()`, diariamente.
 5. Define un evento llamado `ev_backup_clientes_antiguos` que aInserta clientes con `fecha_registro` mayor a 3 años en `clientes_historico`, trimestral.
+
+### Repo de notas
+
+[Notas_Mysql2](https://github.com/JuanDavid888/Notas_MySQL2.git)
