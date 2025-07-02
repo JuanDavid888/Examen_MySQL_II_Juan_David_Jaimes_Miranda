@@ -12,3 +12,15 @@ JOIN sucursal su ON em.sucursal_id = su.id
 JOIN municipio mu ON su.municipio_id = mu.id
 JOIN departamento dep ON mu.departamento_id = dep.id
 JOIN pais pa ON dep.pais_id = pa.id;
+
+-- 2. Listar el nombre de cada cliente con su municipio, departamento y país.
+
+SELECT
+    cl.nombre AS Nombre,
+    mu.nombre AS Municipio,
+    dep.nombre AS Departamento,
+    pa.nombre AS Pais
+FROM clientes cl
+JOIN municipio mu ON cl.municipio_id = mu.id
+JOIN departamento dep ON mu.departamento_id = dep.id
+JOIN pais pa ON dep.pais_id = pa.id;
