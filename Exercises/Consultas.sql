@@ -33,3 +33,15 @@ SELECT
 FROM empleados em
 JOIN sucursal su ON em.sucursal_id = su.id
 WHERE em.puesto IN (em.sucursal_id IN (1,2,3,4,5,6,7,8,9,10))
+
+-- 4. Mostrar el total de empleados por municipio y el nombre del departamento al que pertenecen.
+
+SELECT
+    mu.nombre AS Municipio,
+    dep.nombre AS Departamento,
+    COUNT(em.id) AS Total_empleados
+FROM empleados em
+JOIN sucursal su ON em.sucursal_id = su.id
+JOIN municipio mu ON su.municipio_id = mu.id
+JOIN departamento dep ON mu.departamento_id = dep.id
+GROUP BY mu.nombre, dep.nombre;
