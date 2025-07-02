@@ -77,3 +77,27 @@ END $$
 DELIMITER ;
 
 CALL ps_obtener_clientes_por_municipio('Cali');
+
+-- 3. Cree un procedimiento por nombre  `ps_listar_empleados_por_sucursal` donde muestre todos los empleados de una sucursal .
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS ps_listar_empleados_por_sucursal $$
+
+CREATE PROCEDURE ps_listar_empleados_por_sucursal(
+    IN c_sucursal_nombre VARCHAR(80)
+)
+BEGIN
+    SELECT
+        em.nombre,
+        em.puesto,
+        em.salario
+    FROM empleados em
+    JOIN sucursal su ON em.sucursal_id = su.id
+    WHERE su.nombre = c_sucursal_nombre;
+
+END $$
+
+DELIMITER ;
+
+CALL ps_listar_empleados_por_sucursal('Sucursal Zona 3');
