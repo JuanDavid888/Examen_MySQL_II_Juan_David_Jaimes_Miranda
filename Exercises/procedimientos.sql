@@ -2,4 +2,53 @@
 
 SHOW TABLES;
 
--- 1. Cree un procedimiento llamado `ps_registrar_cliente_unico`  que inserta un nuevo cliente si su correo no está registrado .
+-- 1. Cree un procedimiento llamado `ps_registrar_cliente_unico`  que inserta un nuevo cliente si su correo no está registrado.
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS ps_registrar_cliente_unico $$
+
+CREATE PROCEDURE ps_registrar_cliente_unico(
+    IN c_nombre VARCHAR(80),
+    IN c_correo VARCHAR(50),
+    IN c_telefono VARCHAR(15),
+    IN c_direccion VARCHAR(50),
+    IN c_fecha_registro DATETIME,
+    IN c_municipio_id INT
+)
+BEGIN
+    IF EXISTS (SELECT 1 FROM clientes WHERE nombre = c_nombre) THEN
+        SIGNAL SQLSTATE '40001'
+            SET MESSAGE_TEXT = 'Ese nombre ya existe';
+    END IF;
+
+    IF EXISTS (SELECT 1 FROM clientes WHERE correo = c_correo) THEN
+        SIGNAL SQLSTATE '40001'
+            SET MESSAGE_TEXT = 'Ese correo ya existe';
+    END IF;
+
+    IF c_fecha_registro > NOW() THEN
+        SIGNAL SQLSTATE '40001'
+            SET MESSAGE_TEXT = 'La fecha no puede ser mayor a la de hoy';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM municipio WHERE id = c_municipio_id) THEN
+        SIGNAL SQLSTATE '40002'
+            SET MESSAGE_TEXT = 'El municipio no existe';
+    END IF;
+
+    INSERT INTO clientes (nombre, email, telefono, direccion, fecha_registro, municipio_id)
+    VALUES(c_nombre, c_correo, c_telefono, c_direccion, c_fecha_registro, c_municipio_id);
+
+END $$
+
+DELIMITER ;
+
+CALL ps_registrar_cliente_unico(
+  'Adrian Ruiz', 
+  'adrian.ruiz@gmail.com', 
+  '3123456789', 
+  'Calle 123 #45-67', 
+  '2025-02-01', 
+  5
+);
