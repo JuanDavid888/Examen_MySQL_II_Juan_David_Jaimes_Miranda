@@ -52,3 +52,28 @@ CALL ps_registrar_cliente_unico(
   '2025-02-01', 
   5
 );
+
+-- 2. Cree un procedimiento por nombre `ps_obtener_clientes_por_municipio` donde liste todos los clientes de un municipio .
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS ps_obtener_clientes_por_municipio $$
+
+CREATE PROCEDURE ps_obtener_clientes_por_municipio(
+    IN c_municipio_nombre VARCHAR(80)
+)
+BEGIN
+    SELECT
+        cl.nombre,
+        cl.email,
+        cl.telefono,
+        cl.direccion
+    FROM clientes cl
+    JOIN municipio mu ON cl.municipio_id = mu.id
+    WHERE mu.nombre = c_municipio_nombre;
+
+END $$
+
+DELIMITER ;
+
+CALL ps_obtener_clientes_por_municipio('Cali');
