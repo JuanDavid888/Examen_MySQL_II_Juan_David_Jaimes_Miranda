@@ -45,3 +45,12 @@ JOIN sucursal su ON em.sucursal_id = su.id
 JOIN municipio mu ON su.municipio_id = mu.id
 JOIN departamento dep ON mu.departamento_id = dep.id
 GROUP BY mu.nombre, dep.nombre;
+
+-- 5. Mostrar todos los municipios con sucursales activas (que tengan al menos un empleado).
+
+SELECT
+    mu.nombre AS Municipio
+FROM municipio mu
+JOIN sucursal su ON su.municipio_id = mu.id
+JOIN empleados em ON em.sucursal_id = su.id
+GROUP BY mu.nombre;
