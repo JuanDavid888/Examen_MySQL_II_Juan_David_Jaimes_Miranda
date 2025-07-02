@@ -67,16 +67,6 @@ CREATE TABLE `municipio` (
   `departamento_id` INT NOT NULL
 );
 
-CREATE TABLE `clientes` (
-  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `nombre` VARCHAR(80) NOT NULL,
-  `email` VARCHAR(50) NOT NULL UNIQUE,
-  `telefono` VARCHAR(15) NOT NULL UNIQUE,
-  `direccion` VARCHAR(50) NOT NULL,
-  `fecha_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `municipio_id` INT NOT NULL
-);
-
 CREATE TABLE `empresa` (
   `id` VARCHAR(20) NOT NULL PRIMARY KEY,
   `nombre` VARCHAR(80) NOT NULL UNIQUE
@@ -97,6 +87,16 @@ CREATE TABLE `empleados` (
   `fecha_contratacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `salario` DECIMAL(10,2) NOT NULL,
   `sucursal_id` INT NOT NULL
+);
+
+CREATE TABLE `clientes` (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `nombre` VARCHAR(80) NOT NULL,
+  `email` VARCHAR(50) NOT NULL UNIQUE,
+  `telefono` VARCHAR(15) NOT NULL UNIQUE,
+  `direccion` VARCHAR(50) NOT NULL,
+  `fecha_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `municipio_id` INT NOT NULL
 );
 
 CREATE TABLE `productos` (
